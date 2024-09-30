@@ -40,7 +40,7 @@ jobs:
 
       # Construir la imagen Docker
       - name: Build Docker image
-        run: docker build -t ghcr.io/SergioArias3313/node_docker:latest .
+        run: docker build -t ghcr.io/sergioarias3313/node_docker:latest .
 
       # Iniciar sesión en el GitHub Container Registry
       - name: Log in to GitHub Container Registry
