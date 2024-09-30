@@ -44,7 +44,7 @@ jobs:
 
       # Iniciar sesión en el GitHub Container Registry
       - name: Log in to GitHub Container Registry
-        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u SergioArias3313 --password-stdin
+        run: echo "${{ secrets.GHCR_PAT }}" | docker login ghcr.io -u SergioArias3313 --password-stdin
 
       # Subir la imagen al GitHub Container Registry
       - name: Push Docker image
