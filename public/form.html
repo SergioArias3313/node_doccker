@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agregar Usuario</title>
+</head>
+<body>
+  <h1>Agregar Usuario</h1>
+  <form id="userForm">
+    <label for="name">Nombre:</label><br>
+    <input type="text" id="name" name="name"><br>
+    <label for="email">Email:</label><br>
+    <input type="email" id="email" name="email"><br><br>
+    <button type="submit">Agregar</button>
+  </form>
+
+  <script>
+    document.getElementById('userForm').addEventListener('submit', function(e) {
+      e.preventDefault();  // Evitar la acción predeterminada del formulario
+
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+
+      // Realizar la solicitud POST utilizando fetch
+      fetch('/add', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ name, email }),
+      })
+      .then(response => response.json())
+      .then(data => {
+        alert('Usuario agregado correctamente');
+        console.log(data);
+      })
+      .catch(error => {
+        alert('Hubo un error al agregar el usuario');
+        console.error('Error:', error);
+      });
+    });
+  </script>
+</body>
+</html>

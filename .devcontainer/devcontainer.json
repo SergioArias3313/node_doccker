@@ -1,0 +1,19 @@
+{
+    "name": "Node.js & PostgreSQL Dev Environment",
+
+    "dockerComposeFile": ["../docker-compose.yml"], //cambiar aqui a "../docker-compose.dev.yml"
+    
+    "service": "node-app",
+    "workspaceFolder": "/app",
+    "extensions": [
+      "dbaeumer.vscode-eslint"
+    ],
+    "settings": {
+      "terminal.integrated.profiles.linux": {
+        "bash": {
+          "path": "/bin/bash"
+        }
+      },
+      "terminal.integrated.defaultProfile.linux": "bash"
+    }
+  }
