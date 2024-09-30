@@ -1,0 +1,51 @@
+name: CI/CD Pipeline
+
+# Ejecutar el pipeline en cada push y pull request en la rama principal
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  # Job 1: Ejecutar pruebas
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run tests
+        run: npm test  # Cambia esto si tienes un script de pruebas definido en tu package.json
+
+  # Job 2: Construir y subir la imagen Docker
+  build-and-push-docker:
+    runs-on: ubuntu-latest
+    needs: test
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      # Construir la imagen Docker
+      - name: Build Docker image
+        run: docker build -t ghcr.io/SergioArias3313/node_docker:latest .
+
+      # Iniciar sesión en el GitHub Container Registry
+      - name: Log in to GitHub Container Registry
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u SergioArias3313 --password-stdin
+
+      # Subir la imagen al GitHub Container Registry
+      - name: Push Docker image
+        run: docker push ghcr.io/SergioArias3313/node_docker:latest
