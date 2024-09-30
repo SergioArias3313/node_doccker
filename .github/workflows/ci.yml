@@ -48,4 +48,4 @@ jobs:
 
       # Subir la imagen al GitHub Container Registry
       - name: Push Docker image
-        run: docker push ghcr.io/SergioArias3313/node_docker:latest
+        run: docker push ghcr.io/sergioarias3313/node_docker:latest
